@@ -4,6 +4,7 @@ import { FiArrowLeft, FiEdit2, FiTrash2 } from "react-icons/fi";
 import { deleteNote, getNoteById } from "../api/notesApi";
 import type { Note } from "../types/note";
 import Header from "../components/layout/Header";
+import toast from "react-hot-toast";
 
 function NoteDetailPage() {
   const { id } = useParams<{ id: string }>();
@@ -58,9 +59,11 @@ function NoteDetailPage() {
 
       await deleteNote(id);
 
+      toast.success("Note deleted successfully!");
       navigate("/");
     } catch {
       setError("Unable to delete this note.");
+      toast.error("Unable to delete this note.");
       setIsDeleting(false);
     }
   }

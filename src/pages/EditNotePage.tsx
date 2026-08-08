@@ -3,6 +3,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { FiArrowLeft, FiSave } from "react-icons/fi";
 import { getNoteById, updateNote } from "../api/notesApi";
 import Header from "../components/layout/Header";
+import toast from "react-hot-toast";
 
 function EditNotePage() {
   const { id } = useParams<{ id: string }>();
@@ -69,11 +70,13 @@ function EditNotePage() {
 
     if (!trimmedTitle || !trimmedContent) {
       setError("Title and content are required.");
+      toast.error("Title and content are required.");
       return;
     }
 
     if (trimmedContent.length < 10) {
       setError("Content must be at least 10 characters.");
+      toast.error("Content must be at least 10 characters.");
       return;
     }
 
@@ -90,9 +93,13 @@ function EditNotePage() {
         throw new Error("Failed to update note.");
       }
 
+      toast.success("Note updated successfully!");
+      navigate(`/notes/${data.response.id}`);
+
       navigate(`/notes/${data.response.id}`);
     } catch {
       setError("Unable to update note. Please try again.");
+      toast.error("Unable to update note. Please try again.");
       setIsSubmitting(false);
     }
   }

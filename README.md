@@ -9,7 +9,7 @@ Think Board allows users to create, view, edit, delete, search, and organize the
 ### Core Features
 
 - Display all notes
-- Create new notes
+- Create new notes with title and content
 - Edit existing notes
 - View note details
 - Delete notes with confirmation
@@ -20,11 +20,11 @@ Think Board allows users to create, view, edit, delete, search, and organize the
 
 - Search notes by title and content
 - Sort notes by:
-  - Newest
-  - Oldest
+  - Newest first
+  - Oldest first
   - Title A–Z
   - Title Z–A
-- Toast notifications for success and error states
+- Toast notifications for successful and failed operations
 - Skeleton loading UI
 - Empty states
 - Clear search functionality
@@ -34,13 +34,14 @@ Think Board allows users to create, view, edit, delete, search, and organize the
 
 ## Tech Stack
 
-- **React**
+- **React 19**
 - **TypeScript**
 - **Vite**
 - **React Router**
 - **Axios**
 - **Tailwind CSS**
 - **React Icons**
+- **React Hot Toast**
 - **ESLint**
 
 ## Project Structure
@@ -54,19 +55,10 @@ src/
 ├── components/
 │   ├── layout/
 │   │   └── Header.tsx
-│   ├── notes/
-│   │   ├── NoteCard.tsx
-│   │   └── NoteCardSkeleton.tsx
-│   └── ui/
-│       ├── Toast.tsx
-│       └── ToastContainer.tsx
-│
-├── context/
-│   ├── toastContext.ts
-│   └── ToastProvider.tsx
-│
-├── hooks/
-│   └── useToast.ts
+│   │
+│   └── notes/
+│       ├── NoteCard.tsx
+│       └── NoteCardSkeleton.tsx
 │
 ├── pages/
 │   ├── HomePage.tsx
@@ -78,8 +70,7 @@ src/
 │   └── AppRouter.tsx
 │
 ├── types/
-│   ├── note.ts
-│   └── toast.ts
+│   └── note.ts
 │
 ├── App.tsx
 ├── main.tsx
@@ -90,7 +81,7 @@ src/
 
 Think Board communicates with a REST API for note management.
 
-The frontend uses Axios and provides API operations for:
+The frontend uses **Axios** to communicate with the API and provides the following operations:
 
 ```text
 GET     /notes
@@ -100,10 +91,16 @@ PUT     /notes/:id
 DELETE  /notes/:id
 ```
 
-The API base URL is configured in:
+The Axios configuration is located at:
 
 ```text
 src/api/axios.ts
+```
+
+API-specific functions are implemented in:
+
+```text
+src/api/notesApi.ts
 ```
 
 ## Getting Started
@@ -137,7 +134,7 @@ Run ESLint:
 npm run lint
 ```
 
-Build the application:
+Build the application for production:
 
 ```bash
 npm run build
@@ -154,7 +151,22 @@ Think Board is designed to work across:
 - Laptop
 - Desktop
 
-The layout, search experience, navigation, note cards, forms, and controls adapt to different screen sizes.
+The layout, navigation, search experience, note cards, forms, and controls adapt to different screen sizes.
+
+## User Experience
+
+The interface focuses on providing a simple and intuitive note-taking experience through:
+
+- Clear empty states
+- Loading feedback
+- Skeleton loading
+- Success and error toast notifications
+- Delete confirmation
+- Search and sorting controls
+- Responsive layouts
+- Hover and active interactions
+- Disabled states during asynchronous operations
+- Clear navigation between pages
 
 ## Project Goals
 
@@ -162,18 +174,40 @@ This project was built as a frontend mini-project with a focus on:
 
 - Component-based architecture
 - Type-safe development with TypeScript
-- API integration
+- REST API integration
 - React state management
 - Responsive UI design
 - User experience
-- Error and loading handling
+- Loading and error handling
 - Maintainable project structure
+- Clean and reusable components
 
 ## Current Status
 
 **Status: Completed**
 
-Implemented functionality includes the required note management features as well as additional UX improvements such as search, sorting, toast notifications, skeleton loading, confirmation dialogs, empty states, and responsive UI.
+Think Board includes all required note-management functionality along with additional UX improvements.
+
+### Requirements Checklist
+
+#### Core Features
+
+- [x] Display notes
+- [x] Create notes
+- [x] Edit notes
+- [x] Delete notes
+- [x] View note details
+- [x] Loading and error states
+- [x] Responsive design
+
+#### Bonus Features
+
+- [x] Toast notifications
+- [x] Delete confirmation
+- [x] Search
+- [x] Sorting
+- [x] Skeleton loading
+- [x] Empty states and UX improvements
 
 ---
 

@@ -1,11 +1,24 @@
+import { Toaster } from "react-hot-toast";
 import AppRouter from "./routes/AppRouter";
-import ToastProvider from "./context/ToastProvider";
 
 function App() {
   return (
-    <ToastProvider>
+    <>
       <AppRouter />
-    </ToastProvider>
+
+      <Toaster
+        position="top-right"
+        toastOptions={{
+          duration: 4000,
+          style: {
+            borderRadius: "12px",
+            background: "#0f172a",
+            color: "#fff",
+            fontSize: "14px",
+          },
+        }}
+      />
+    </>
   );
 }
 

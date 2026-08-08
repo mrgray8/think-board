@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { FiArrowLeft, FiSave } from "react-icons/fi";
 import { createNote } from "../api/notesApi";
 import Header from "../components/layout/Header";
+import toast from "react-hot-toast";
 
 function CreateNotePage() {
   const navigate = useNavigate();
@@ -20,6 +21,7 @@ function CreateNotePage() {
 
     if (!trimmedTitle || !trimmedContent) {
       setError("Title and content are required.");
+      toast.error("Title and content are required.");
       return;
     }
 
@@ -36,9 +38,13 @@ function CreateNotePage() {
         throw new Error("Failed to create note.");
       }
 
+      toast.success("Note created successfully!");
+      navigate(`/notes/${data.response.id}`);
+
       navigate(`/notes/${data.response.id}`);
     } catch {
       setError("Unable to create note. Please try again.");
+      toast.error("Unable to create note. Please try again.");
       setIsSubmitting(false);
     }
   }
